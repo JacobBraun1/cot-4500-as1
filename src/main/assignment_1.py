@@ -22,12 +22,12 @@ def double_precision():
 
 def three_digit_round():
     number = 491.5625
-    print(int(round(number,0)))
+    print(round((number/1000),3))
     return
 
 def three_digit_chop():
     number = 491.5625
-    print((int)(str(number)[:3]))
+    print(((int)(str(number)[:3]))/1000)
     return
 
 def absolute_error(x,xbar):
@@ -39,10 +39,8 @@ def relative_error(x,xbar):
 def question_four():
     number = 491.5625
     rounded_number = 492
-    relativeErrorOfRoundedNumber = relative_error(number,rounded_number)
-    absoluteErrorOfRoundedNumber = absolute_error(number,rounded_number)
-    print(absoluteErrorOfRoundedNumber)
-    print(relativeErrorOfRoundedNumber)
+    print(absolute_error(number,rounded_number))
+    print(relative_error(number,rounded_number))
     return 
 
 def question_five():
@@ -55,7 +53,7 @@ def question_five():
         #print(series(1,currentItteration))
         current += 1
 
-    print(current)
+    print(current - 1)
 
 def Bisection_Root(val_a,val_b,minimum_error,f:callable):
     
@@ -90,7 +88,7 @@ def Newton_Raphson(initialGuess,minError,function_f,function_f_p):
             next = previous - function_f(previous)/function_f_p(previous)
 
             if(abs(previous - next) < minError):
-                return current
+                return current + 1
             
             previous = next
             current += 1
@@ -112,6 +110,7 @@ def question_six():
     Bisection = Bisection_Root(val_a,val_b,mininimum_error,function_f)
 
     print(Bisection)
+    print()
     print(Newton)
 
 
