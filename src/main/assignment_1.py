@@ -1,22 +1,20 @@
 import numpy as np
 
 def double_precision():
-    s = 0
+    s,c,i,f = 0,0,0,0
     exponent = 10000000111
-    c,i = 0,0
+    fraction = "111010111001000000000000000000000000000000"
+
     while(exponent != 0):
         exp = exponent % 10
-        c = c + exp * pow(2,i)
+        c = c + exp * (2**i)
         exponent = exponent//10
         i +=1 
-    fraction = str(111010111001000000000000000000000000000000)
-    f = 0
     i = 1
-    for item in fraction:
-        f = f + int(item) * (0.5 **i)
+    for k in fraction:
+        f = f + int(k) * (0.5 **i)
         i += 1
-    n = ((-1)** s)*(2**(c-1023))*((1+f))
-    print(n)
+    print(((-1)** s)*(2**(c-1023))*((1+f)))
     return 
 
 
@@ -30,17 +28,11 @@ def three_digit_chop():
     print(((int)(str(number)[:3]))/1000)
     return
 
-def absolute_error(x,xbar):
-    return abs(x-xbar)
-
-def relative_error(x,xbar):
-    return 0 if x == 0 else absolute_error(x,xbar)/abs(x)
-    
 def question_four():
     number = 491.5625
     rounded_number = 492
-    print(absolute_error(number,rounded_number))
-    print(relative_error(number,rounded_number))
+    print(abs(number-rounded_number))
+    print(abs((number-rounded_number)/number))
     return 
 
 def question_five():
@@ -50,7 +42,6 @@ def question_five():
     minimum_error = 0.0001
     current =  1
     while(abs(series(1,current)) > minimum_error):
-        #print(series(1,currentItteration))
         current += 1
 
     print(current - 1)
@@ -68,7 +59,6 @@ def Bisection_Root(val_a,val_b,minimum_error,f:callable):
         p = (left+right)/2
 
         l1 = f(left)
-        l2 = f(right)
         lmid = f(p)
         if(l1 < 0 and lmid > 0):
             right = p
@@ -76,12 +66,12 @@ def Bisection_Root(val_a,val_b,minimum_error,f:callable):
             left = p
     return current
 
-def Newton_Raphson(initialGuess,minError,function_f,function_f_p):
+def Newton_Raphson(initial,minError,function_f,function_f_p):
     max_num = 200
     current = 0
 
-    previous = initialGuess
-    next = previous
+    next, previous = initial, initial
+    
     while(current < max_num):
         if(function_f_p(previous) != 0):
 
